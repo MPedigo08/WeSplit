@@ -35,8 +35,18 @@ struct ContentView: View {
                     }
                 }
                 
+                Section("Tip percentage") {
+                    Picker("Tip percentage", selection: $tipPercentage) {
+                        ForEach(tipPercentages, id: \.self) {
+                            Text("\($0)%")
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+                
                 Section("Amount per person"){
                     Text(totalPerPerson, format: .currency(code: "USD"))
+                        .foregroundColor(tipPercentage == 0 ? .red : .primary)
                 }
             }
             .navigationTitle("WeSplit")
